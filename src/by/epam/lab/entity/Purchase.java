@@ -11,21 +11,20 @@ public class Purchase {
     private final Byn price;
     private final int number;
 
-    public Purchase(String name, Byn price, int number) throws CsvArgsException {
-        if (!name.isEmpty() && price.compareTo(new Byn(0)) > 0 && number > 0){
-            this.name = name;
-            this.price = price;
-            this.number = number;
-        } else throw new CsvArgsException();
+    public Purchase(String name, Byn price, int number) {
+        this.name = name;
+        this.price = price;
+        this.number = number;
     }
 
-    public Purchase(Scanner sc) throws CsvArgsException {
+    public Purchase(Scanner sc) {
         this(sc.next(), new Byn(sc.nextInt()), sc.nextInt());
     }
 
-    public Purchase(Purchase purchase) throws CsvArgsException {
+    public Purchase(Purchase purchase) {
         this(purchase.name, purchase.price, purchase.number);
     }
+
 
     public String getName() {
         return name;
@@ -45,6 +44,10 @@ public class Purchase {
 
     public String toString() {
         return String.format("%s;%s;%d;%s", name, price.toString(), number, getCost());
+    }
+
+    public Purchase getCopy() {
+        return new Purchase(this);
     }
 
     @Override

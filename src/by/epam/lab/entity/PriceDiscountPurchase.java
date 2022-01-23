@@ -8,21 +8,29 @@ import java.util.Scanner;
 public class PriceDiscountPurchase extends Purchase {
     private final Byn discount;
 
-    public PriceDiscountPurchase(String name, Byn price, int number, Byn discount) throws CsvArgsException {
+    public PriceDiscountPurchase(String name, Byn price, int number, Byn discount) {
         super(name, price, number);
-        if (discount.compareTo(new Byn(0)) > 0 && price.compareTo(discount) > 0 ) {
-            this.discount = discount;
-        } else throw new CsvArgsException();
+        this.discount = discount;
     }
 
-    public PriceDiscountPurchase(Scanner sc) throws CsvArgsException {
+    public PriceDiscountPurchase(Scanner sc) {
         super(sc);
         this.discount = new Byn(sc.nextInt());
     }
 
-    public PriceDiscountPurchase(Byn discount, Purchase purchase) throws CsvArgsException {
+    public PriceDiscountPurchase(Byn discount, Purchase purchase) {
         super(purchase);
         this.discount = discount;
+    }
+
+    public PriceDiscountPurchase(PriceDiscountPurchase priceDiscountPurchase) {
+        super(priceDiscountPurchase);
+        discount = priceDiscountPurchase.discount;
+    }
+
+    @Override
+    public Purchase getCopy() {
+        return new PriceDiscountPurchase(this);
     }
 
     @Override

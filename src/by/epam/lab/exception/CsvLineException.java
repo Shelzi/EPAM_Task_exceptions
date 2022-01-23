@@ -1,6 +1,6 @@
 package by.epam.lab.exception;
 
-public class CsvLineException extends Exception {
+public class CsvLineException extends AbstractCsvExceptions {
     public CsvLineException() {
         super("Wrong line format : ");
     }
