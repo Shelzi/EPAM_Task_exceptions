@@ -1,6 +1,7 @@
 package by.epam.lab.entity;
 
 import by.epam.lab.exception.AbstractCsvExceptions;
+import by.epam.lab.exception.ArrayNotSortedException;
 import by.epam.lab.exception.CsvLineException;
 import by.epam.lab.factory.PurchaseFactory;
 
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 public class PurchaseList {
     private List<Purchase> purchaseList;
     private final Comparator<Purchase> purchaseComparator;
+    private boolean isSorted = false;
 
     public PurchaseList(String filename, Comparator<Purchase> purchaseComparator) {
         this.purchaseComparator = purchaseComparator;
@@ -46,9 +48,10 @@ public class PurchaseList {
         return purchaseComparator;
     }
 
-    public void addPurchase(int index, Purchase purchase) {
+    public <T extends Purchase> void addPurchase(int index, T purchase) {
         try {
             purchaseList.add(index, purchase);
+            isSorted = false;
         } catch (IndexOutOfBoundsException e) {
             purchaseList.add(purchase);
             System.err.println(e.getMessage() + "Wrong index, object inserted in the end off array");
@@ -58,6 +61,7 @@ public class PurchaseList {
     public void deletePurchases(int from, int to) {
         try {
             purchaseList.subList(from, to).clear();
+            isSorted = false;
         } catch (IndexOutOfBoundsException e) {
             System.err.println(e.getMessage() + "Wrong index, nothing are deleted");
         }
@@ -65,6 +69,21 @@ public class PurchaseList {
 
     public Byn getAllCost() {
         return purchaseList.stream().map(Purchase::getCost).reduce(new Byn(), Byn::add);
+    }
+
+    public void sortPurchaseList() {
+        purchaseList = purchaseList.stream()
+                        .sorted(purchaseComparator)
+                        .collect(Collectors.toList());
+        isSorted = true;
+    }
+
+    public <T extends Purchase> int  searchPurchase(T key) throws ArrayNotSortedException {
+        if (isSorted) {
+            return Collections.binarySearch(purchaseList, key, purchaseComparator);
+        } else {
+            throw new ArrayNotSortedException();
+        }
     }
 
     public String toCsvString() {

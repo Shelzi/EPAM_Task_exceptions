@@ -1,12 +1,11 @@
 package by.epam.lab.runner;
 
+import by.epam.lab.entity.Byn;
 import by.epam.lab.entity.Purchase;
 import by.epam.lab.entity.PurchaseList;
+import by.epam.lab.exception.ArrayNotSortedException;
 
 import java.util.Comparator;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class Runner {
     public static void main(String[] args) {
@@ -16,11 +15,12 @@ public class Runner {
         purchaseList.getPurchaseList().forEach(System.out::println);
         System.out.println(purchaseList.getAllCost());
         System.out.println(purchaseList.toCsvString());
-        PurchaseList sortedPurchaseList = new PurchaseList(
-                purchaseList.getPurchaseList().stream()
-                        .sorted(purchaseList.getPurchaseComparator())
-                        .collect(Collectors.toList()),
-                purchaseComparator);
-        sortedPurchaseList.getPurchaseList().forEach(System.out::println);
+        purchaseList.sortPurchaseList();
+        purchaseList.getPurchaseList().forEach(System.out::println);
+        try {
+            System.out.println(purchaseList.searchPurchase(new Purchase("butter", new Byn(370), 1)));
+        } catch (ArrayNotSortedException e) {
+            System.err.println(e.getMessage());
+        }
     }
 }
