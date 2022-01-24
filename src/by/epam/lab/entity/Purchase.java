@@ -1,8 +1,5 @@
 package by.epam.lab.entity;
 
-import by.epam.lab.exception.CsvArgsException;
-import by.epam.lab.exception.CsvLineException;
-
 import java.util.Objects;
 import java.util.Scanner;
 

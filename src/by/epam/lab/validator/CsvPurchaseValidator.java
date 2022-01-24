@@ -1,7 +1,5 @@
 package by.epam.lab.validator;
 
-import by.epam.lab.entity.Byn;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

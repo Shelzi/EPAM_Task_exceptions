@@ -8,8 +8,6 @@ import by.epam.lab.exception.CsvArgsException;
 import by.epam.lab.exception.CsvLineException;
 import by.epam.lab.validator.CsvPurchaseValidator;
 
-import java.util.Arrays;
-import java.util.Optional;
 import java.util.Scanner;
 
 public class PurchaseFactory {

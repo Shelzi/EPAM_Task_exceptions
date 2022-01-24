@@ -2,7 +2,6 @@ package by.epam.lab.entity;
 
 import by.epam.lab.exception.AbstractCsvExceptions;
 import by.epam.lab.exception.ArrayNotSortedException;
-import by.epam.lab.exception.CsvLineException;
 import by.epam.lab.factory.PurchaseFactory;
 
 import java.io.FileNotFoundException;
@@ -73,12 +72,12 @@ public class PurchaseList {
 
     public void sortPurchaseList() {
         purchaseList = purchaseList.stream()
-                        .sorted(purchaseComparator)
-                        .collect(Collectors.toList());
+                .sorted(purchaseComparator)
+                .collect(Collectors.toList());
         isSorted = true;
     }
 
-    public <T extends Purchase> int  searchPurchase(T key) throws ArrayNotSortedException {
+    public <T extends Purchase> int searchPurchase(T key) throws ArrayNotSortedException {
         if (isSorted) {
             return Collections.binarySearch(purchaseList, key, purchaseComparator);
         } else {

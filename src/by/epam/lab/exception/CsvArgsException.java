@@ -1,6 +1,6 @@
 package by.epam.lab.exception;
 
-public class CsvArgsException extends AbstractCsvExceptions{
+public class CsvArgsException extends AbstractCsvExceptions {
     public CsvArgsException() {
         super("Wrong parameter(s) in line ");
     }

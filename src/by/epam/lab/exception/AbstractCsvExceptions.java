@@ -1,6 +1,6 @@
 package by.epam.lab.exception;
 
-public abstract class AbstractCsvExceptions extends Exception{
+public abstract class AbstractCsvExceptions extends Exception {
     public AbstractCsvExceptions() {
     }
 

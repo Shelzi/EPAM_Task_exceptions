@@ -1,0 +1,8 @@
+bread;155;1;2
+milk;131;2
+bread;154;3
+bread;145;5
+potato;180;2;10
+butter;370;1
+butter;341;1;1
+meat;1100;2;80
